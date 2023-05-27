@@ -56,6 +56,7 @@ type Client struct {
 	Certificates      *CertificatesService
 	Contacts          *ContactsService
 	Domains           *DomainsService
+	SecondaryDNS      *SecondaryService
 	Oauth             *OauthService
 	Registrar         *RegistrarService
 	Services          *ServicesService
@@ -95,6 +96,7 @@ func NewClient(httpClient *http.Client) *Client {
 	c.Certificates = &CertificatesService{client: c}
 	c.Contacts = &ContactsService{client: c}
 	c.Domains = &DomainsService{client: c}
+	c.SecondaryDNS = &SecondaryService{client: c}
 	c.Oauth = &OauthService{client: c}
 	c.Registrar = &RegistrarService{client: c}
 	c.Services = &ServicesService{client: c}
