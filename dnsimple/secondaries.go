@@ -100,6 +100,22 @@ func (s *SecondaryService) ListPrimaryServers(ctx context.Context, accountID str
         return serversResponse, nil
 }
 
+// GetPrimaryServer
+//
+// See https://developer.dnsimple.com/v2/secondary-dns/#getPrimaryServer
+func (s *SecondaryService) GetPrimaryServer(ctx context.Context, accountID string, serverIdentifier string) (*SecondaryServerResponse, error) {
+	path := versioned(secondaryDNSPrimary(accountID, serverIdentifier))
+	serverResponse := &SecondaryServerResponse{}
+
+        resp, err := s.client.get(ctx, path, serverResponse)
+        if err != nil {
+                return nil, err
+        }
+
+        serverResponse.HTTPResponse = resp
+        return serverResponse, nil
+}
+
 // DeletePrimaryServer
 //
 // See https://developer.dnsimple.com/v2/secondary-dns/#removePrimaryServer
